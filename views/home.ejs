@@ -1,0 +1,46 @@
+<%- include('partials/header') -%>
+    <%if(typeof name != 'undefined' ){%>
+    <h2 class="alert alert-dark">Welcome <%= typeof name != 'undefined' ? name : ""%></h2>
+    <%}%>
+    <div class="jumbotron jumbotron-fluid">
+      <div class="container">
+        <h1 class="display-5">For all your parking needs</h1>
+        <p class="lead text-center">Here you can rent out the unused parking space at your house. And book a slot at affordable rates.</p>
+        <p class="lead text-center">All you need is a parking space and nothing else.! Try now.</p>
+      </div>
+    </div>
+    <form action="/search" method="get" class="search_form">
+      <div>
+        <input type="text" id="location" name='location' placeholder="Address, Zip Code, Landmark" autofocus required>
+      </div>
+      <button class="btn btn-primary btn-lg" type="submit">Go</button>
+    </form>
+      <%if(typeof session != 'undefined'){%>
+        <% if(session.authenticated) {%>
+          <div>
+            <div>
+              <a class="btn btn-primary btn-block add-listing-btn"  href="/listing">Add a listing</a>
+              <br>
+            </div>
+          </div>
+        <%} else {%>
+          <div class="landing-buttons text-center">
+            <form action="/login" method="get">
+              <button class='btn btn-lg btn-dark col-md-3' type="submit">Login</button>
+            </form>
+            <form action="/register" method="get">
+              <button class='btn btn-lg btn-outline-dark col-md-3' type="submit">Register</button>
+            </form>
+          </div>
+        <%}%>
+       <%} else {%>
+        <div class="landing-buttons text-center">
+          <form action="/login" method="get">
+            <button class='btn btn-lg btn-dark col-md-3' type="submit">Login</button>
+          </form>
+          <form action="/register" method="get">
+            <button class='btn btn-lg btn-outline-dark col-md-3' type="submit">Register</button>
+          </form>
+        </div>
+        <%}%>
+<%- include('partials/footer') -%>

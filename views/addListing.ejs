@@ -1,0 +1,81 @@
+<%- include('partials/header') -%>
+    <h1>Add a Listing</h1>
+    <form action='/listing' method='post' class='fluid' enctype="multipart/form-data">
+        <div class='row'>
+          <div class='col fluid-form form-floating mb-3'>
+            <div class="form-group">
+                <label for="inputAddress">Address Line 1*</label>
+                <input type="text" name="addressLine1" class="form-control" id="inputAddress" placeholder="1234 Main St" required value="<%= listing.addressLine1%>">
+              </div>
+              <div class="form-group">
+                <label for="inputAddress2">Address Line 2</label>
+                <input type="text" name="addressLine2" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor" <%= listing.addressLine2%>>
+              </div>
+          </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="inputCity">City*</label>
+              <input type="text" name="city" class="form-control" id="inputCity" required value="<%= listing.city%>">
+            </div>
+            <div class="form-group col-md-4">
+              <label for="inputState">State/Province*</label>
+              <select id="inputState" class="form-control" required name="province">
+                <option selected>Choose...</option>
+                <option>AB</option>
+                <option>BC</option>
+                <option>MB</option>
+                <option>NB</option>
+                <option>NL</option>
+                <option>NS</option>
+                <option>ON</option>
+                <option>PE</option>
+                <option>QC</option>
+                <option>SK</option>
+              </select>
+            </div>
+            <div class="form-group col-md-2">
+              <label for="inputZip">ZipCode*</label>
+              <input type="text" class="form-control" id="inputZip" name="zipcode" required value="<%= listing.zipcode%>">
+            </div>
+          </div>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="phone">Phone Number*</label>
+                <input type="text" name="phone" class="form-control" id="phone" placeholder="(000)-000-0000" required value="<%= listing.phone%>">
+            </div>
+            <div class="form-group col-md-6">
+                <label for="upload">Upload images*</label>
+                <input type="file" name="images" class="form-control" id="upload" multiple required>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="availableFromTs">Available From</label>
+              <input id="availableFromTs" class="form-control" type="datetime-local" name="availableFromTs" value="<%=listing.availableFromTs%>">
+            </div>
+            <div class="form-group col-md-6">
+              <label for="availableToTs">Available Till</label>
+              <input id="availableToTs" class="form-control" type="datetime-local" name="availableToTs" value="<%=listing.availableToTs%>">
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="hourlyRate">Hourly Rate*</label>
+                <input type="text" name="hourlyRate" class="form-control" id="hourlyRate" required value="<%= listing.hourlyRate%>">
+            </div>
+            <div class="form-group col-md-6">
+                <label for="monthlyRate">MonthlyRate</label>
+                <input type="text" name="monthlyRate" class="form-control" id="monthlyRate" value="<%= listing.monthlyRate%>">
+            </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group col">
+              <label for="instructions">Special Instructions</label>
+              <textarea type="text" name="instructions" class="form-control" id="instructions" ><%=listing.instructions%></textarea>
+          </div>
+        </div>
+        <button class='btn btn-lg btn-outline-dark' type="submit">Add Listing</button>
+    </form>
+    <script src="/js/phoneFormatter.js"></script>
+<%- include('partials/footer') -%>

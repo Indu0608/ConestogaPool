@@ -1,0 +1,34 @@
+.profile-data {
+    background-color: gold;
+    padding: 10px;
+    font-size: 250%;
+    filter: drop-shadow(1px 1px 2px black);
+}
+/* .h6, h6 {
+    font-weight: 600;
+    font-size: 1rem;
+    color: darkslategray;
+}
+.h5, h5 {
+    color: darkslategray;
+    font-size: 1.25rem;
+    font-weight: 900;
+} */
+.btn-primary{
+    color: #fff;
+    background-color: #245285;
+    filter: drop-shadow(1px 1px 1px black);
+}
+.btn-outline-dark {
+    font-weight: 700;
+    background-color: bisque;
+    color: #660606;
+    border-color: #343a40;
+    font-family: cursive;
+    filter: drop-shadow(1px 1px 1px black);
+    margin-bottom: 22px;
+}
+.text-right {
+    font-family: cursive;
+    text-align: right!important;
+}
