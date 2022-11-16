@@ -1,18 +1,19 @@
 const mongoose = require("mongoose")
 
 const schema = mongoose.Schema({
-    addressLine1: String,
-    addressLine2: String,
-    city: String,
-    province: String,
-    zipcode: String,
-    phone: String,
-    images: Array,
     userId: String,
+    fromaddressLine: String,
+    toaddressLine: String,
     availableFromTs: Date,
     availableToTs: Date,
-    hourlyRate: Number,
-    monthlyRate: Number,
+    driverName: String,
+    carModel: String,
+    carLicense: String,
+    carMake: String,
+    carColour: String,
+    images: Array,
+    noSeats: String,
+    pricePerSeat: String,
     instructions: String
 })
 

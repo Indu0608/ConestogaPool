@@ -35,15 +35,15 @@
                         <%if(typeof session !='undefined' ){%>
                             <% if(session.authenticated) {%>
                                 <a class="nav-item nav-link" href="/profile">PROFILE</a>
-                                <a class="nav-item nav-link" href="/listing">ADD A LISTING</a>
+                                <a class="nav-item nav-link" href="/listing">POST A RIDE</a>
                                 <a class="nav-item nav-link" href="/logout">LOGOUT</a>
                                 <%} else {%>
                                     <a class="nav-item nav-link" href="/login">LOGIN</a>
-                                    <a class="nav-item nav-link" href="/register">REGISTER</a>
+                                    <a class="nav-item nav-link" href="/register">SIGN UP</a>
                                     <%}%>
                                         <%} else {%>
                                             <a class="nav-item nav-link" href="/login">LOGIN</a>
-                                            <a class="nav-item nav-link" href="/register">REGISTER</a>
+                                            <a class="nav-item nav-link" href="/register">SIGN UP</a>
                                             <%}%>
                     </div>
                 </div>

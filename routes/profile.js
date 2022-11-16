@@ -1,7 +1,6 @@
 const express = require('express')
 const router = express.Router()
 const users = require('../models/User')
-const booking = require('../models/booking')
 const listing = require('../models/listing')
 const payment = require('../models/payment')
 
@@ -12,19 +11,21 @@ router.get('/', middlewareObj.isLoggedIn, async (req, res) => {
     userData.data = await getUserData(req.session.userId)
     userData.listings = await getListings(req.session.userId)
     userData.bookings = await getBookings(req.session.userId)
-    if(req.session.alerts.data) {
-        res.render('profile', {userData: userData, session: req.session, alert: true, alerts: {
-            data: req.session.alerts.data,
-            type: req.session.alerts.type,
-        } })
+    if (req.session.alerts.data) {
+        res.render('profile', {
+            userData: userData, session: req.session, alert: true, alerts: {
+                data: req.session.alerts.data,
+                type: req.session.alerts.type,
+            }
+        })
     } else {
-        res.render('profile', {userData: userData, session: req.session})
+        res.render('profile', { userData: userData, session: req.session })
     }
 })
 
 function getUserData(userId) {
-    return new Promise ( promise => {
-        users.findOne({_id: userId}, (err, data) => {
+    return new Promise(promise => {
+        users.findOne({ _id: userId }, (err, data) => {
             if (err) {
                 promise(err)
             } else {
@@ -37,8 +38,8 @@ function getUserData(userId) {
 }
 
 function getListings(userId) {
-    return new Promise ( promise => {
-        listing.find({userId: userId}, (err, data) => {
+    return new Promise(promise => {
+        listing.find({ userId: userId }, (err, data) => {
             if (err) {
                 promise(err)
             } else {
@@ -52,15 +53,15 @@ function getListings(userId) {
 
 async function getBookings(userId) {
     let bookings = []
-    return new Promise ( promise => {
-        booking.find({userId: userId}, async (err, data) => {
+    return new Promise(promise => {
+        booking.find({ userId: userId }, async (err, data) => {
             if (err) {
                 promise(err)
             } else {
                 if (data) {
                     for (const element of data) {
                         let list = await getListing(element.parkingSpaceId)
-                        bookings.push({data: element, listing: list})
+                        bookings.push({ data: element, listing: list })
                     }
                     promise(bookings)
                 }
@@ -70,8 +71,8 @@ async function getBookings(userId) {
 }
 
 function getListing(listingId) {
-    return new Promise ( promise => {
-        listing.findById({_id: listingId}, (err, data) => {
+    return new Promise(promise => {
+        listing.findById({ _id: listingId }, (err, data) => {
             if (err) {
                 promise(err)
             } else {

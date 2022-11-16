@@ -10,6 +10,9 @@ const users = require('./models/User')
 // Adding Routes
 const loginRouter = require('./routes/login');
 const registerRouter = require('./routes/register');
+const searchRouter = require('./routes/search');
+const listingRouter = require('./routes/listings');
+const profileRouter = require('./routes/profile');
 
 let app = express();
 
@@ -31,10 +34,26 @@ app.use(session({
     maxAge: 30 * 60 * 1000,
     saveUninitialized: true,
 }));
-
+app.get('/', (req, res) => {
+    req.session.alerts = {
+        data: "",
+        type: ""
+    }
+    res.render('home', {
+        tempData: "",
+        userName: req.session.username,
+        name: req.session.name,
+        loggedIn: req.session.authenticated,
+        session: req.session
+    });
+})
 // Using the routes
 app.use('/login', loginRouter);
 app.use('/register', registerRouter);
+app.use('/search', searchRouter);
+app.use('/listing', listingRouter);
+app.use('/profile', profileRouter);
+
 
 const databaseConn = 'mongodb+srv://indulekha:keshu@cluster0.dcgbs71.mongodb.net/testDB';
 mongoose.connect(databaseConn, {
@@ -56,7 +75,10 @@ app.get('/', (req, res) => {
     res.render("login")
 })
 
-
+app.get('/logout', (req, res) => {
+    req.session = null
+    res.redirect('/')
+})
 
 app.listen(process.env.PORT || 3500, function () {
     console.log("Server started on port 3500");

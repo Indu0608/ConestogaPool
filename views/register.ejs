@@ -1,48 +1,49 @@
 <%- include('partials/header') -%>
-    <h1>Register here</h1>
-    <form action='/register' method='post' class='fluid' class="login-form" enctype="multipart/form-data">
-        <div class='row'>
-          <div class="form-group col-md-9">
-            <label for="fullname">Full Name</label>
-            <input type="text" id="fullname" class='form-control' name='name' placeholder="Full Name" autofocus required>
-          </div>
-          <div class="form-group col-md-3">
-            <label for="upload">Add a Profile Picture</label>
-            <input type="file" name="images" class="form-control" id="upload">
-          </div>
-          <div class="form-group col-md-6">
-            <label for="">Address Line 1</label>
-            <input type="text" class='form-control' name='addressLine1' placeholder="123 St" required>
-          </div>
-          <div class="form-group col-md-6">
-            <label for="">Address Line 2</label>
-            <input type="text" class='form-control' name='addressLine2' placeholder="Apt / Room / Other No" required>
-          </div>
-          <div class="form-group col-md-6">
-            <label for="">Phone</label>
-            <input type="text" class='form-control' name='phone' id="phone" placeholder="Phone" required>
-          </div>
-          <div class="form-group col-md-6">
-            <label for="">Email</label>
-            <input type="email" class='form-control' name='email' placeholder="Email ID" required>
-          </div>
-          <div class="form-group col-md-6">
-            <label for="">User name</label>
-            <input type="text" class='form-control' name='userName' placeholder="User Name" required>
-          </div>
-          <div class="form-group col-md-6"> </div>
-          <div class="form-group col-md-6">
-            <label for="">Password</label>       <i class="fa-solid fa-check-double text-danger" id="passwordenter"></i>
-            <input type="password" class='form-control register-passwords' name='password' placeholder="Password" required>
-          </div>
-          <div class="form-group col-md-6">
-            <label for="">Reenter Password</label>       <i class="fa-solid fa-check-double text-danger" id="passwordreenter"></i>
-            <input type="password" class='form-control register-passwords' name='repassword' placeholder="Reenter Password" required>
-          </div>
-          <div class='col fluid-form form-floating mb-3'>
-            <button class='btn btn-md btn-outline-dark' id="register-btn" type="submit" disabled>Register</button>
-          </div>
-        </div>
-    </form>
-    <script src="/js/phoneFormatter.js"></script>
-<%- include('partials/footer') -%>
+  <h1>Sign Up here</h1>
+  <form action='/register' method='post' class='fluid' class="login-form" enctype="multipart/form-data">
+    <div class='row'>
+      <div class="form-group col-md-9">
+        <label for="fullname">Full Name</label>
+        <input type="text" id="fullname" class='form-control' name='name' placeholder="Full Name" autofocus required>
+      </div>
+      <div class="form-group col-md-3">
+        <label for="upload">Add a Profile Picture</label>
+        <input type="file" name="images" class="form-control" id="upload">
+      </div>
+      <div class="form-group col-md-6">
+        <label for="">Address Line 1</label>
+        <input type="text" class='form-control' name='addressLine1' placeholder="123 St" required>
+      </div>
+      <div class="form-group col-md-6">
+        <label for="">Address Line 2</label>
+        <input type="text" class='form-control' name='addressLine2' placeholder="Apt / Room / Other No" required>
+      </div>
+      <div class="form-group col-md-6">
+        <label for="">Phone</label>
+        <input type="text" class='form-control' name='phone' id="phone" placeholder="Phone" required>
+      </div>
+      <div class="form-group col-md-6">
+        <label for="">Email</label>
+        <input type="email" class='form-control' name='email' placeholder="Email ID" required>
+      </div>
+      <div class="form-group col-md-6">
+        <label for="">User name</label>
+        <input type="text" class='form-control' name='userName' placeholder="User Name" required>
+      </div>
+      <div class="form-group col-md-6"> </div>
+      <div class="form-group col-md-6">
+        <label for="">Password</label> <i class="fa-solid fa-check-double text-danger" id="passwordenter"></i>
+        <input type="password" class='form-control register-passwords' name='password' placeholder="Password" required>
+      </div>
+      <div class="form-group col-md-6">
+        <label for="">Reenter Password</label> <i class="fa-solid fa-check-double text-danger" id="passwordreenter"></i>
+        <input type="password" class='form-control register-passwords' name='repassword' placeholder="Reenter Password"
+          required>
+      </div>
+      <div class='col fluid-form form-floating mb-3'>
+        <button class='btn btn-md btn-outline-dark' id="register-btn" type="submit" disabled>Sign Up</button>
+      </div>
+    </div>
+  </form>
+  <script src="/js/phoneFormatter.js"></script>
+  <%- include('partials/footer') -%>
