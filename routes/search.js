@@ -17,8 +17,9 @@ const today = new Date()
 const tomorrow = new Date(today)
 let inputVal = {
     location: "",
+    toLocation: "",
+    numSeats: 0,
     fromTs: `${today.getFullYear()}-${String(today.getMonth() + 1).padStart(2, '0')}-${String(today.getDate()).padStart(2, '0')}T12:00`,
-    toTs: `${tomorrow.getFullYear()}-${String(tomorrow.getMonth() + 1).padStart(2, '0')}-${String((tomorrow.getDate() + 1)).padStart(2, '0')}T12:00`,
 }
 
 // Setup Geocoder options
@@ -38,14 +39,17 @@ router.get('/', async function (req, res) {
     tomorrow.setDate(tomorrow.getDate() + 1)
     const urlParams = new URLSearchParams(req._parsedOriginalUrl.search)
 
-    if (urlParams.get('location') > "") {
-        inputVal.location = urlParams.get('location')
+    if (urlParams.get('fromaddressLine') > "") {
+        inputVal.location = urlParams.get('fromaddressLine')
     }
     if (urlParams.get('fromTs') > "") {
         inputVal.fromTs = urlParams.get('fromTs')
     }
-    if (urlParams.get('toTs') > "") {
-        inputVal.toTs = urlParams.get('toTs')
+    if (urlParams.get('toaddressLine') > "") {
+        inputVal.toLocation = urlParams.get('toaddressLine')
+    }
+    if (urlParams.get('numSeats') > "") {
+        inputVal.numSeats = parseInt(urlParams.get('numSeats'))
     }
     geocoder.geocode(inputVal.location, function (err, data) {
         if (err || !data.length) {
@@ -53,7 +57,10 @@ router.get('/', async function (req, res) {
             alerts.type = "danger"
             res.render("searchPage", { alert: true, alerts: alerts, markers: [[]], inputVal: inputVal, session: req.session })
         } else if (data.length) {
-            let eligibleLocations = []
+
+            req.session.userBookingDetails = inputVal
+            let eligibleLocations1 = []
+            let eligibleLocations2 = []
             let locations = []
             let locationsData = []
             let locationsDataTemp = []
@@ -66,15 +73,16 @@ router.get('/', async function (req, res) {
                     if (!err && data.length) {
                         for (const element of data) {
                             eligibleLocationId.push(element._id)
-                            eligibleLocations.push(element.addressLine1)
+                            eligibleLocations1.push(element.fromaddressLine)
+                            eligibleLocations2.push(element.toaddressLine)
                             locationsDataTemp.push(element)
                         }
-                        console.log(eligibleLocations)
+                        console.log(eligibleLocations1)
                         client
                             .distancematrix({
                                 params: {
                                     origins: [inputVal.location],
-                                    destinations: eligibleLocations,
+                                    destinations: eligibleLocations1,
                                     key: process.env.GEOCODER_API_KEY
                                 },
                                 timeout: 1000
@@ -84,14 +92,22 @@ router.get('/', async function (req, res) {
                                 r.data.rows[0].elements.forEach(e => {
                                     if (e.status == "OK") {
                                         if (e.distance.value < 10000) {
-                                            locations.push(eligibleLocations[i])
+                                            locations.push(eligibleLocations1[i])
                                             // locationsData.push({locationsDataTemp[i]})
+                                            console.log(locationsDataTemp[i])
                                             locationsData.push({
                                                 _id: locationsDataTemp[i]._id,
-                                                addressLine1: locationsDataTemp[i].addressLine1,
+                                                fromaddressLine: locationsDataTemp[i].fromaddressLine,
+                                                toaddressLine: locationsDataTemp[i].toaddressLine,
                                                 images: locationsDataTemp[i].images,
-                                                hourlyRate: locationsDataTemp[i].hourlyRate,
+                                                pricePerSeat: locationsDataTemp[i].pricePerSeat,
                                                 distance: e.distance.value,
+                                                driverName: locationsDataTemp[i].driverName,
+                                                carModel: locationsDataTemp[i].carModel,
+                                                carMake: locationsDataTemp[i].carMake,
+                                                carColour: locationsDataTemp[i].carColour,
+                                                noSeats: locationsDataTemp[i].noSeats,
+                                                availableFromTs: locationsDataTemp[i].availableFromTs
                                             })
                                         }
                                     }
@@ -100,7 +116,6 @@ router.get('/', async function (req, res) {
                                 await getLocations(locations).then(loc => {
                                     if (loc.length > 0) {
                                         req.session.fromTs = inputVal.fromTs
-                                        req.session.toTs = inputVal.toTs
                                         res.render("searchPage", { markers: loc, listings: locationsData, inputVal: inputVal, session: req.session })
                                     } else {
                                         alerts.data = "No listings in 10KM radius of your selection, try a diffrent location"
@@ -127,18 +142,18 @@ router.get('/', async function (req, res) {
 
 
 router.get('/distance', async function (req, res) {
-    let eligibleLocations = []
+    let eligibleLocations1 = []
     let locations = []
     listings.find((err, data) => {
         if (!err && data) {
             data.forEach(row => {
-                eligibleLocations.push(row.addressLine1)
+                eligibleLocations1.push(row.fromaddressLine)
             })
             client
                 .distancematrix({
                     params: {
                         origins: ["Cambridge Centre"],
-                        destinations: eligibleLocations,
+                        destinations: eligibleLocations1,
                         key: process.env.GEOCODER_API_KEY
                     },
                     timeout: 1000 // milliseconds
@@ -147,8 +162,8 @@ router.get('/distance', async function (req, res) {
                     let i = 0
                     r.data.rows[0].elements.forEach(e => {
                         if (e.status == "OK") {
-                            if (e.distance.value < 10000) {
-                                locations.push(eligibleLocations[i])
+                            if (e.distance.value < 20000) {
+                                locations.push(eligibleLocations1[i])
                             }
                         }
                         i++

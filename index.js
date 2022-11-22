@@ -13,6 +13,7 @@ const registerRouter = require('./routes/register');
 const searchRouter = require('./routes/search');
 const listingRouter = require('./routes/listings');
 const profileRouter = require('./routes/profile');
+const bookingRouter = require('./routes/book');
 
 let app = express();
 
@@ -53,6 +54,7 @@ app.use('/register', registerRouter);
 app.use('/search', searchRouter);
 app.use('/listing', listingRouter);
 app.use('/profile', profileRouter);
+app.use('/book', bookingRouter);
 
 
 const databaseConn = 'mongodb+srv://indulekha:keshu@cluster0.dcgbs71.mongodb.net/testDB';

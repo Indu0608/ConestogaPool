@@ -12,7 +12,7 @@ const schema = mongoose.Schema({
     carMake: String,
     carColour: String,
     images: Array,
-    noSeats: String,
+    noSeats: Number,
     pricePerSeat: String,
     instructions: String
 })

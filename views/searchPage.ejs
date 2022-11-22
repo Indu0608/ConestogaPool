@@ -3,22 +3,13 @@
     <div class="search-container">
       <div>
         <form action="/search" method="get" class="fluid">
-          <input type="text" id="location" name='location' class="form-control" placeholder="Enter a location"
-            value='<%=inputVal.location%>' autofocus required>
-          <table>
-            <tr>
-              <th>Enter Before</th>
-              <th>Exit After</th>
-            </tr>
-            <tr>
-              <td><input class="form-control" type="datetime-local" name="fromTs" value="<%=inputVal.fromTs%>"></td>
-              <td><input class="form-control" type="datetime-local" name="toTs" value="<%=inputVal.toTs%>"></td>
-              <td><button class="search-btn" type="submit"><i class="fa-solid fa-arrow-right"></i></button></td>
-            </tr>
-            <tr>
-
-            </tr>
-          </table>
+          <input type="text" id="fromaddressLine" name='fromaddressLine' class="form-control"
+            placeholder="Pick up Address" required>
+          <input type="text" id="toaddressLine" name='toaddressLine' class="form-control" placeholder="Drop off Address"
+            required>
+          <input class="form-control" type="datetime-local" name="searchDate">
+          <input type="text" name="numSeats" id="numSeats" placeholder="No of Seats">
+          <input type="submit" value="Search">
         </form>
         <div class="all-listings">
           <%if(typeof listings !='undefined' ) {%>
@@ -31,18 +22,25 @@
                         <%= ++i%>
                       </h3>
                     </div>
-                    <a href="/listing/<%=listing._id%>"><img class="listing-images p-2" src="data:image/<%=listing.images[0].contentType%>;base64,
-                                            <%=listing.images[0].data.toString('base64')%>" alt="image for user"></a>
                     <div class="p-2">
                       <h5>
-                        <%=listing.addressLine1%>
+                        <%=listing.driverName%>
+                      </h5>
+                    </div>
+                    <div class="p-2">
+                      <h5>
+                        <%=listing.fromaddressLine%>
+                      </h5>
+                      <h5>
+                        <%=listing.toaddressLine%>
                       </h5>
                       <p>
-                        <%=listing.distance%> mts
+                        Distance From Pickup Location<%=listing.distance%> mts
                       </p>
                     </div>
                     <div class="p-2">
-                      <h4>$<%=listing.hourlyRate%>/Hour</h4>
+                      <h4>$<%=listing.pricePerSeat%>
+                      </h4>
                       <a class="book-listing" href="book/<%=listing._id%>">Book</a>
                     </div>
                   </div>

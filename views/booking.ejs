@@ -1,0 +1,70 @@
+<%- include('partials/header') -%>
+    <h1>Booking</h1>
+    <form action="/book/<%=info.rideID%>" method="post" class="fluid">
+        <div class="book-container">
+            <div class="book-left-container">
+
+                <div>
+                    <h2>Account Info</h2>
+                    <h6>Confirm Email Address</h6>
+                    <div class="form-group col-md-6">
+                        <input type="email" class="form-control" value="<%=info.email%>" name="email">
+                    </div>
+                    <h6>Phone</h6>
+                    <div class="form-group col-md-4">
+                        <input type="text" class="form-control" id='phone' name="phone" value="<%=info.phone%>">
+                    </div>
+
+                </div>
+                <div>
+                    <h2>Reservation Details</h2>
+                    <h3>Pick Up Address</h3>
+                    <h6>
+                        <%=listingDetails.fromaddressLine%>
+                    </h6>
+                    <h3>Drop off Address</h3>
+                    <h6>
+                        <%=listingDetails.toaddressLine%>
+                    </h6>
+                    <h3>Number of Seats:</h3>
+                    <h6>
+                        <%=listingDetails.numSeats%>
+                    </h6>
+
+                </div>
+
+            </div>
+            <div class="book-right-container">
+                <div>
+                    <h2>Ride Details</h2>
+                    <h3>
+                        <b>
+                            <%=listingDetails.driverName%>
+                        </b>
+                    </h3>
+                    <p>
+                        <%=listingDetails.carModel%> - <%=listingDetails.carLicense%> - <%=listingDetails.carMake%>
+                    </p>
+
+                    <img class="listing-images" src="data:image/<%=listingDetails.images[0].contentType%>;base64,
+                        <%=listingDetails.images[0].data.toString('base64')%>" alt="image for listing">
+                </div>
+
+                <div>
+                    <h2>Payment Details</h2>
+                    <h5 class="text-right">Total $<%=rates.total.toFixed(2)%>
+                    </h5>
+                    <hr>
+                    <h6 class="text-right">Tax $<%=rates.tax.toFixed(2)%>
+                    </h6>
+                    <hr>
+                    <h6 class="text-right">Net Total $<%=rates.netAmount.toFixed(2)%>
+                    </h6>
+
+                </div>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary btn-lg btn-block">Pay and Book</button>
+    </form>
+    <script src="/js/phoneFormatter.js"></script>
+    <%- include('partials/footer') -%>

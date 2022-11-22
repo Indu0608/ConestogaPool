@@ -2,6 +2,7 @@ const express = require('express')
 const router = express.Router()
 const users = require('../models/User')
 const listing = require('../models/listing')
+const booking = require('../models/booking')
 const payment = require('../models/payment')
 
 const middlewareObj = require('../middleware/index')
@@ -60,7 +61,8 @@ async function getBookings(userId) {
             } else {
                 if (data) {
                     for (const element of data) {
-                        let list = await getListing(element.parkingSpaceId)
+                        console.log(element)
+                        let list = await getListing(element.rideID)
                         bookings.push({ data: element, listing: list })
                     }
                     promise(bookings)
