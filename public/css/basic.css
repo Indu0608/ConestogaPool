@@ -8,11 +8,16 @@
 }
 
 body {
-    background-color: aliceblue;
+    background-color: white;
 }
 
 a {
     text-decoration: none;
+}
+
+.logo {
+    width: 100px;
+    height: 100px;
 }
 
 fieldset {
@@ -26,7 +31,7 @@ fieldset {
     border-radius: 0;
     margin-bottom: 20px;
     font-size: 12px;
-    letter-spacing: 5px;
+    letter-spacing: 1px;
 }
 
 .navbar-nav a:hover {
@@ -34,14 +39,14 @@ fieldset {
 }
 
 .navbar-light .navbar-brand {
-    color: #a52589;
+    color: rgb(57, 10, 157);
     font-weight: bold;
     font-size: 50px;
     text-shadow: 2px 2px #1fa1cd;
 }
 
 .navbar-light .navbar-nav .nav-link {
-    color: darkmagenta;
+    color: rgb(57, 10, 157);
     font-family: 'FontAwesome';
     font-size: 14px;
     padding: 34px;
@@ -49,7 +54,6 @@ fieldset {
 }
 
 .jumbotron-fluid {
-    background-image: url(htps://thumbs.dreamstime.com/b/wiley-surrey-uk-april-car-park-parking-lot-colorful-different-coloured-cars-trees-distance-wisley-surrey-uk-april-car-109250888.jpg);
     padding-right: 0;
     padding-left: 0;
     border-radius: 0;
@@ -67,7 +71,7 @@ h1 {
     text-align: center !important;
     font-weight: 600 !important;
     font-size: 2.5rem;
-    color: darkslateblue;
+    color: rgb(36, 20, 135);
     text-transform: uppercase;
 }
 
@@ -95,7 +99,7 @@ h1 {
     text-align: center;
     width: 100%;
     /* height: 40px; */
-    background-color: #287e9b;
+    background-color: #e16a4f;
 }
 
 .footer p {
@@ -207,8 +211,8 @@ input[type=submit] {
 [type=reset]:not(:disabled),
 [type=submit]:not(:disabled),
 button:not(:disabled) {
-    background-color: #131366;
-    border-color: #cd6921;
+    background-color: #4646c8;
+    border-color: #9f12a1;
     font-family: cursive;
     font-weight: 500;
     color: white;
@@ -225,7 +229,10 @@ button:not(:disabled) {
 
 .search-container {
     display: grid;
-    grid-template-columns: 45% 5% 50%;
+    grid-template-columns: 80% 5% 80%;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .search_form button {
@@ -271,7 +278,7 @@ button:not(:disabled) {
 
 .list-items {
     border-radius: 20px;
-    border: 5px solid green;
+    border: 5px solid lightseagreen;
     margin: 10px;
     padding: 10px 10px 0 10px;
     transition: 1s;
@@ -306,5 +313,5 @@ button:not(:disabled) {
 
 .all-listings {
     overflow-y: auto;
-    max-height: 50vh;
+    max-height: 80vh;
 }

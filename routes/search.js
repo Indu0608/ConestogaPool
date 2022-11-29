@@ -51,6 +51,11 @@ router.get('/', async function (req, res) {
     if (urlParams.get('numSeats') > "") {
         inputVal.numSeats = parseInt(urlParams.get('numSeats'))
     }
+    if (inputVal.location == null || inputVal.location == "") {
+        alerts.data = "Please enter the values below"
+        alerts.type = "success"
+        res.render("searchPage", { alert: true, alerts: alerts, markers: [[]], inputVal: inputVal, session: req.session })
+    }
     geocoder.geocode(inputVal.location, function (err, data) {
         if (err || !data.length) {
             alerts.data = "Invalid address, try again"

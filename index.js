@@ -79,6 +79,7 @@ app.get('/', (req, res) => {
 
 app.get('/logout', (req, res) => {
     req.session = null
+    console.log(req.session)
     res.redirect('/')
 })
 

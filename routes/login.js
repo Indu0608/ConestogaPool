@@ -6,16 +6,17 @@ const bcrypt = require('bcrypt')
 var alerts = require('../data/alerts')
 
 router.get('/', (req, res) => {
-    res.render("login", {session: req.session})
+    res.render("login", { session: req.session })
 })
 
 router.post('/', (req, res) => {
-    users.findOne({userName: req.body.userName}, (err, data) => {
-        if (err) { console.log(err)}
+    console.log("After login:" + wreq.session)
+    users.findOne({ userName: req.body.userName }, (err, data) => {
+        if (err) { console.log(err) }
         else {
-            if(data){
+            if (data) {
                 bcrypt.compare(req.body.password, data.password, (err, result) => {
-                    if(result){
+                    if (result) {
                         req.session.authenticated = true
                         req.session.username = req.body.userName
                         req.session.userId = data._id
@@ -26,15 +27,15 @@ router.post('/', (req, res) => {
                     } else {
                         alerts.data = "Password is incorrect"
                         alerts.type = "danger"
-                        res.render('login', {alert: true, alerts: alerts, session: req.session})
+                        res.render('login', { alert: true, alerts: alerts, session: req.session })
                     }
-                    
+
                 })
             }
             else {
                 alerts.data = "User is not registered"
                 alerts.type = "danger"
-                res.render('login', {alert: true, alerts: alerts, session: req.session})
+                res.render('login', { alert: true, alerts: alerts, session: req.session })
             }
         }
     })

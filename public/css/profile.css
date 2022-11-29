@@ -1,9 +1,10 @@
 .profile-data {
-    background-color: gold;
+    background-color: rgb(42, 163, 159);
     padding: 10px;
     font-size: 250%;
     filter: drop-shadow(1px 1px 2px black);
 }
+
 /* .h6, h6 {
     font-weight: 600;
     font-size: 1rem;
@@ -14,11 +15,12 @@
     font-size: 1.25rem;
     font-weight: 900;
 } */
-.btn-primary{
+.btn-primary {
     color: #fff;
-    background-color: #245285;
+    background-color: #4b8ad1;
     filter: drop-shadow(1px 1px 1px black);
 }
+
 .btn-outline-dark {
     font-weight: 700;
     background-color: bisque;
@@ -28,7 +30,8 @@
     filter: drop-shadow(1px 1px 1px black);
     margin-bottom: 22px;
 }
+
 .text-right {
     font-family: cursive;
-    text-align: right!important;
+    text-align: right !important;
 }

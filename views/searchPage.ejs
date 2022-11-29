@@ -4,11 +4,11 @@
       <div>
         <form action="/search" method="get" class="fluid">
           <input type="text" id="fromaddressLine" name='fromaddressLine' class="form-control"
-            placeholder="Pick up Address" required>
+            placeholder="Pick up Address" required value="<%= inputVal.location %>">
           <input type="text" id="toaddressLine" name='toaddressLine' class="form-control" placeholder="Drop off Address"
-            required>
-          <input class="form-control" type="datetime-local" name="searchDate">
-          <input type="text" name="numSeats" id="numSeats" placeholder="No of Seats">
+            required value="<%= inputVal.toLocation %>">
+          <input class="form-control" type="datetime-local" name="searchDate" value="<%= inputVal.fromTs %>">
+          <input type="text" name="numSeats" id="numSeats" placeholder="No of Seats" value="<%= inputVal.numSeats %>">
           <input type="submit" value="Search">
         </form>
         <div class="all-listings">
@@ -51,67 +51,61 @@
         </div>
       </div>
       <div>
-
       </div>
-      <div>
-        <div id="map">Nothing to display here</div>
-      </div>
-    </div>
-  </div>
 
-  <script>
-    function initMap() {
-      var labels = "123456789"
-      let labelIndex = 0
-      var center = { lat: <%=markers[0][0] %>, lng: <%=markers[0][1] %> };
-      var markers = [];
-      var map = new google.maps.Map(document.getElementById('map'), {
-        zoom: 13,
-        center: center,
-        mapTypeControl: true,
-        mapTypeControlOptions: {
-          style: google.maps.MapTypeControlStyle.VERTICAL_BAR,
-          position: google.maps.ControlPosition.BOTTOM_CENTER,
-        },
-        panControl: true,
-        panControlOptions: {
-          position: google.maps.ControlPosition.TOP_LEFT,
-        },
-        zoomControl: true,
-        zoomControlOptions: {
-          style: google.maps.ZoomControlStyle.LARGE,
-          position: google.maps.ControlPosition.LEFT_CENTER,
-        },
-        scaleConrol: true,
-        scaleControlOptions: {
-          position: google.maps.ControlPosition.TOP_LEFT,
-        },
-      });
-      const image = "https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png";
+      <script>
+        function initMap() {
+          var labels = "123456789"
+          let labelIndex = 0
+          var center = { lat: <%=markers[0][0] %>, lng: <%=markers[0][1] %> };
+          var markers = [];
+          var map = new google.maps.Map(document.getElementById('map'), {
+            zoom: 13,
+            center: center,
+            mapTypeControl: true,
+            mapTypeControlOptions: {
+              style: google.maps.MapTypeControlStyle.VERTICAL_BAR,
+              position: google.maps.ControlPosition.BOTTOM_CENTER,
+            },
+            panControl: true,
+            panControlOptions: {
+              position: google.maps.ControlPosition.TOP_LEFT,
+            },
+            zoomControl: true,
+            zoomControlOptions: {
+              style: google.maps.ZoomControlStyle.LARGE,
+              position: google.maps.ControlPosition.LEFT_CENTER,
+            },
+            scaleConrol: true,
+            scaleControlOptions: {
+              position: google.maps.ControlPosition.TOP_LEFT,
+            },
+          });
+          const image = "https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png";
         <% markers.forEach((marker) => { %>
           var pin = new google.maps.Marker({
-        position: new google.maps.LatLng(<%= marker[0] %>, <%= marker[1] %>),
-        map: map,
-        label: labels[labelIndex++]
-      });
-        markers.push(pin)
-          <%}) %>
+            position: new google.maps.LatLng(<%= marker[0] %>, <%= marker[1] %>),
+            map: map,
+            label: labels[labelIndex++]
+          });
+            markers.push(pin)
+              <%}) %>
         
 
         var i = 0;
-      markers.forEach(marker => {
-        marker.addListener("mouseover", () => {
-          i++
-          var infowindow = new google.maps.InfoWindow({
-            content: JSON.stringify(marker)
-          });
-          infowindow.open(map, marker);
-        })
-      })
+          markers.forEach(marker => {
+            marker.addListener("mouseover", () => {
+              i++
+              var infowindow = new google.maps.InfoWindow({
+                content: JSON.stringify(marker)
+              });
+              infowindow.open(map, marker);
+            })
+          })
 
 
-    }
-  </script>
-  <script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA3ZMh-oENriiaX4LDfzNVQONZKEarXK5Q&callback=initMap"></script>
-  <%- include('partials/footer') -%>
+        }
+      </script>
+      <script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA3ZMh-oENriiaX4LDfzNVQONZKEarXK5Q&callback=initMap"></script>
+      <%- include('partials/footer') -%>
